@@ -1,0 +1,24 @@
+- hosts: app-agendar-aqui
+  become: yes
+  tasks:
+    - name: Atualizar índice de pacotes
+      apt:
+        update_cache: yes
+
+    - name: Instalar Node.js e npm
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - nodejs
+        - npm
+
+    - name: Instalar dependências npm
+      npm:
+        path: ./barber-shop
+
+    - name: Iniciar servidor HTTP
+      shell: busybox httpd -f -p 80
+      async: 100
+      poll: 0
+      ignore_errors: yes

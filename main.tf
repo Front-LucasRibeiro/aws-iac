@@ -19,8 +19,8 @@ provider "aws" {
 resource "aws_instance" "app_server" {
   ami           = "ami-08af887b5731562d3"
   instance_type = "t3.micro"
-  key_name = "agendar_aqui"
+  key_name = "key-agendar-aqui"
   tags = {
-    Name = "agendar-aqui-admin"
+    Name = "admin-agendar-aqui"
   }
 }
